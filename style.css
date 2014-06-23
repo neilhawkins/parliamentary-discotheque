@@ -1,0 +1,14 @@
+#container {	
+	height: 100px;
+	width: 100%;
+	margin: auto auto;
+}
+
+#member {
+	font-size: 40px;
+	line-height: 100px;
+	text-align: center;
+	font-weight: 700;
+	color: #fff;
+	font-family: 'Raleway';
+}
