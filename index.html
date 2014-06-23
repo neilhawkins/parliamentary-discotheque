@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <link rel="stylesheet" href="style.css">
+    <title>Parliamentary discotheque</title>
+    <link rel="stylesheet" href="app.min.css">
     <script src="bower_components/lodash/dist/lodash.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="mp.json"></script>
@@ -15,86 +15,53 @@
     <div id="container">
         <h1 id="member"></h1>
     </div>
-    <button onClick=stop()>Please stop this ordeal</button>
+    <!-- # Never gonna let you stop # -->
+    <!-- <button onClick=hon.stop()>Please stop this ordeal</button> -->
+
     <script>
-    d3.csv("proms-2.csv", function(data) {
-        nd = d3.nest()
-        	.key(function(d) { return d.prom_date; })
-        	.key(function(d) {return d.composer; })
-        	.sortKeys(function(d) {return d.composer; })
-       		.entries(data);
-        // data.forEach(function(d) {
+	    var hon = {
 
-        // });
-    		nd = nd;
-        console.log(nd);
+	        interval: null,
+	        colours: {
 
-    });
+	            "Conservative": "#0087DC",
+	            "Labour": "#DC241f",
+	            "Liberal Democrat": "#FDBB30",
+	            "DUP": "#D46A4C",
+	            "Scottish National Party": "#FFFF00",
+	            "Sinn Fein": "#008800",
+	            "Independent": "#DDDDDD",
+	            "Plaid Cymru": "#008142",
+	            "Social Democratic and Labour Party": "#99FF66",
+	            "Alliance": "#FFD700",
+	            "Green": "#6AB023",
+	            "Respect": "#FF3300",
+	            "Speaker": "black"
+	        },
 
+	        get_random_mp: function() {
+	            // var id = Math.floor(Math.random() * members.length);
+	            // lo-dash version, lazzzeee
+	            var id = _.random(members.length - 1);
+	            if (members[id] !== undefined) {
+	                var bg_color = members[id].party;
+	            } else {}
+	            document.getElementById('member').innerHTML = members[id].name;
+	            document.getElementById('container').style.background = hon.colours[bg_color];
+	            console.log(hon);
+	        },
 
+	        init: function() {
+	            interval = setInterval(hon.get_random_mp, 500);
+	        },
 
+	        stop: function() {
+	            clearInterval(interval);
+	        }
 
-    // var newdata = {
-    //     "name": "all_proms",
-    //     "proms": [{
-    //         "prom_date": "date",
-    //         "venue": "venue",
-    //         "performances": [{
-    //             "composer": "composername",
-    //             "piece": "piecename"
-    //         }, {
-    //             "composer": "composername",
-    //             "piece": "piecename"
-    //         }]
-    //     }, {
-    //         "prom_date": "date",
-    //         "venue": "venue",
-    //         "performances": [{
-    //             "composer": "composername",
-    //             "piece": "piecename"
-    //         }, {
-    //             "composer": "composername",
-    //             "piece": "piecename"
-    //         }]
-    //     }]
-    // };
+	    };
 
-    var interval;
-    var colours = {
-
-        "Conservative": "#0087DC",
-        "Labour": "#DC241f",
-        "Liberal Democrat": "#FDBB30",
-        "DUP": "#D46A4C",
-        "Scottish National Party": "#FFFF00",
-        "Sinn Fein": "#008800",
-        "Independent": "#DDDDDD",
-        "Plaid Cymru": "#008142",
-        "Social Democratic and Labour Party": "#99FF66",
-        "Alliance": "#FFD700",
-        "Green": "#6AB023",
-        "Respect": "#FF3300",
-        "Speaker": "black"
-    };
-
-    function get_random_mp() {
-        //var id = Math.floor(Math.random() * members.length);
-        var id = _.random(members.length - 1);
-        if (members[id] === undefined) {
-            console.log(id);
-        } else {
-            var bg_color = members[id].party;
-            //console.log(id);
-        }
-        document.getElementById('member').innerHTML = members[id].name;
-        document.getElementById('container').style.background = colours[bg_color];
-    }
-
-    interval = setInterval(get_random_mp, 20011);
-
-    function stop() {
-        clearInterval(interval);
-    }
+	    hon.init();
     </script>
 </body>
 
