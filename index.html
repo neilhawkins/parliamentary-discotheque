@@ -2,67 +2,21 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Parliamentary discotheque</title>
-    <link rel="stylesheet" href="app.min.css">
-    <script src="bower_components/lodash/dist/lodash.min.js"></script>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="mp.json"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Parliamentary discotheque</title>
+  <link rel="stylesheet" href="dist/assets/css/app.min.css">
 </head>
 
 <body id="body">
-    <div id="container">
-        <h1 id="member"></h1>
-    </div>
-    <!-- # Never gonna let you stop # -->
-    <!-- <button onClick=hon.stop()>Please stop this ordeal</button> -->
+  <div id="container">
+  </div>
+  <!-- # Never gonna let you stop # -->
+  <!-- <button onClick=this.stop()>Please stop this ordeal</button> -->
 
-    <script>
-	    var hon = {
+  <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+  <script src="dist/assets/js/app.min.js"></script>
 
-	        interval: null,
-	        colours: {
-
-	            "Conservative": "#0087DC",
-	            "Labour": "#DC241f",
-	            "Liberal Democrat": "#FDBB30",
-	            "DUP": "#D46A4C",
-	            "Scottish National Party": "#FFFF00",
-	            "Sinn Fein": "#008800",
-	            "Independent": "#DDDDDD",
-	            "Plaid Cymru": "#008142",
-	            "Social Democratic and Labour Party": "#99FF66",
-	            "Alliance": "#FFD700",
-	            "Green": "#6AB023",
-	            "Respect": "#FF3300",
-	            "Speaker": "black"
-	        },
-
-	        get_random_mp: function() {
-	            // var id = Math.floor(Math.random() * members.length);
-	            // lo-dash version, lazzzeee
-	            var id = _.random(members.length - 1);
-	            if (members[id] !== undefined) {
-	                var bg_color = members[id].party;
-	            } else {}
-	            document.getElementById('member').innerHTML = members[id].name;
-	            document.getElementById('container').style.background = hon.colours[bg_color];
-	            console.log(hon);
-	        },
-
-	        init: function() {
-	            interval = setInterval(hon.get_random_mp, 500);
-	        },
-
-	        stop: function() {
-	            clearInterval(interval);
-	        }
-
-	    };
-
-	    hon.init();
-    </script>
 </body>
 
 </html>

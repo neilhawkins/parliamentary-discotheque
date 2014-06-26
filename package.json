@@ -1,0 +1,20 @@
+{
+  "name": "mpdisco",
+  "version": "0.0.1",
+  "author": "Neil Hawkins",
+  "private": true,
+  "devDependencies": {
+    "load-grunt-tasks": "~0.6.0",
+    "grunt": "~0.4.0",
+    "grunt-contrib-cssmin": "*",
+    "grunt-contrib-sass": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-concat": "~0.4.0",
+    "grunt-htmlhint": "*",
+    "grunt-bower-task": "~0.3.4",
+    "grunt-autoprefixer": "~0.7.6",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-clean": "~0.5.0"
+  }
+}
