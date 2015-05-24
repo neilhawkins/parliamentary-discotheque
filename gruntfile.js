@@ -48,7 +48,7 @@ module.exports = function(grunt) {
 		uglify: {
 			options: {
 				compress: {
-					drop_console: false
+					drop_console: true
 				}
 			},
 			dist: {
@@ -121,7 +121,7 @@ module.exports = function(grunt) {
 
 			js: {
 				files: ['assets/js/app.js'],
-				tasks: ['jshint','concat','uglify' ]
+				tasks: ['uglify']
 			}
 
 		}
@@ -132,7 +132,7 @@ module.exports = function(grunt) {
 	// grunt.loadNpmTasks('grunt-htmlhint');
 
 	// Register Tasks
-	grunt.registerTask('default', ['htmlhint', 'concat', 'jshint', 'cssbuild', 'bower',] );
+	grunt.registerTask('default', ['htmlhint', 'concat', 'uglify', 'jshint', 'cssbuild', 'bower',] );
 	grunt.registerTask('cssbuild', ['sass','autoprefixer','cssmin'] );
 
 };

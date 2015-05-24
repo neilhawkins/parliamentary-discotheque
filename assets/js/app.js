@@ -1,9 +1,20 @@
-function on_success(response) {
-        console.log(response);
-        data = response;
-}
+function Tile(speed) {
+    "use strict";
+    var self = this;
+    this.interval = null;
+    this.data = null;
+    this.speed = speed;
 
-function get_json(callback) {
+    this.init = function () {
+        var self = this;
+        this.load_json(function(response) {
+            var data = JSON.parse(response);
+            self.on_complete(data);
+        });
+    };
+}        
+
+Tile.prototype.load_json = function(callback) {
     var r = new XMLHttpRequest();
     r.open('GET', "mp.json", true);
     r.onreadystatechange = function () {
@@ -12,48 +23,13 @@ function get_json(callback) {
                 callback(r.responseText); // we're calling our method
         }
     };
-    r.send();
-}
-
-get_json(function(response) {
-    on_success(JSON.parse(response));
-});
-
-
-
-function Tile(speed) {
-    "use strict";
-    var self = this;
-    this.interval = null;
-    this.data = null;
-    this.speed = speed;
-}        
-
-Tile.prototype.init = function () {
-    // this.load_json(function(response) {
-    //     var data = JSON.parse(response);
-    this.on_complete(data);
-    // });
-
+    r.send(null);
 };
-
-// Tile.prototype.load_json = function(callback) {
-//     var r = new XMLHttpRequest();
-//     r.open('GET', "mp.json", true);
-//     r.onreadystatechange = function () {
-//         if (r.readyState === 4 && r.status === 200) { // successfully
-//                 //var json = JSON.parse(httpRequest.responseText);
-//                 callback(r.responseText); // we're calling our method
-//         }
-//     };
-//     r.send(null);
-// };
 
 Tile.prototype.on_complete = function(data) {
     
     var bg_color;
     var d = this.data = data.MPs;
-    
     //for (i=0; i < d.length; i ++) {
 
       var div = document.createElement("div"); 
@@ -62,12 +38,12 @@ Tile.prototype.on_complete = function(data) {
       this.interval = setTimeout(function a() {
 
         var id = Math.floor(Math.random() * d.length);
-        var first_name = d[id].name.split(' ')[0];  
+        //var first_name = d[id].name.split(' ')[0];  
         bg_color = d[id].party;
         div.className = 'tile ' + bg_color.replace(/\s+/g, '').toLowerCase();
-        div.innerHTML = first_name;        
-        setTimeout(a, 250);
-      }, 500);
+        //div.innerHTML = first_name;        
+        setTimeout(a, 500);
+      }, 1000);
     //}
     //this.shuffle_tiles(data);
 };
@@ -108,8 +84,8 @@ Tile.prototype.stop = function() {
     var tile = new Tile();
     tile.init(); 
     if (--i) generate(i);   //  decrement i, 0 is falsy, will terminate at 0
-  }, _.random(10,20));                  // time between tile generation
-})(650);                     // number of tiles
+  }, 200);                  // time between tile generation
+})(10);                     // number of tiles
 
 // Verbose method of above
 // function generate(i) { 
