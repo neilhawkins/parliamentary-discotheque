@@ -1,8 +1,3 @@
-// Grunting - create package.json with grunt, npm install
-//					- add devDependencies, then npm instal
-// 					- don't forget load-grunt-tasks,  
-//					-	https://github.com/sindresorhus/load-grunt-tasks
-
 module.exports = function(grunt) {
 	
 	require("load-grunt-tasks")(grunt);	
@@ -110,7 +105,7 @@ module.exports = function(grunt) {
 		watch: {
 			html: {
 				files: ['index.html', '<%= jshint.files %>'],
-				tasks: ['default']
+				tasks: ['htmlhint']
 			},
 
 			css: {
@@ -121,7 +116,7 @@ module.exports = function(grunt) {
 
 			js: {
 				files: ['assets/js/app.js'],
-				tasks: ['uglify']
+				tasks: ['jshint']
 			}
 
 		}
@@ -132,7 +127,7 @@ module.exports = function(grunt) {
 	// grunt.loadNpmTasks('grunt-htmlhint');
 
 	// Register Tasks
-	grunt.registerTask('default', ['htmlhint', 'concat', 'uglify', 'jshint', 'cssbuild', 'bower',] );
+	grunt.registerTask('default', ['htmlhint', 'concat', 'uglify', 'jshint', 'cssbuild', 'bower'] );
 	grunt.registerTask('cssbuild', ['sass','autoprefixer','cssmin'] );
 
 };
