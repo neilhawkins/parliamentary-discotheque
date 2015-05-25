@@ -1,16 +1,30 @@
+function Dancefloor(parseJSON) {
+    // var r = new XMLHttpRequest();
+    // r.open('GET', 'http://www.theyworkforyou.com/api/getMPs?key=E5L2aTCuvEZnAXuVfyGN83sM&output=js', true);
+    // r.load = function () {
+        // if (r.readyState === 4 && r.status === 200) {
+            // parseJSON(r.responseText);
+
+        // } else {
+            // console.log('request failed');
+
+        // }
+    // };
+    // r.send(null);
+    $.getJSON('mp.json').done(function(data) {    
+        parseJSON(data);
+    });
+}
+
+
 function Tile(speed) {
-    "use strict";
     var self = this;
     this.interval = null;
-    this.data = null;
+    this.data = Dancefloor.data;
     this.speed = speed;
 
     this.init = function () {
-        var self = this;
-        this.load_json(function(response) {
-            var data = JSON.parse(response);
-            self.on_complete(data);
-        });
+        this.newMP();
     };
 }        
 
@@ -26,10 +40,10 @@ Tile.prototype.load_json = function(callback) {
     r.send(null);
 };
 
-Tile.prototype.on_complete = function(data) {
+Tile.prototype.newMP = function() {
     
     var bg_color;
-    var d = this.data = data.MPs;
+    var d = Dancefloor.data;
     //for (i=0; i < d.length; i ++) {
 
       var div = document.createElement("div"); 
@@ -40,7 +54,10 @@ Tile.prototype.on_complete = function(data) {
         var id = Math.floor(Math.random() * d.length);
         //var first_name = d[id].name.split(' ')[0];  
         bg_color = d[id].party;
-        div.className = 'tile ' + bg_color.replace(/\s+/g, '').toLowerCase();
+        
+        div.className = 'tile ' + bg_color.replace('é', 'e');
+        div.className = 'tile ' + bg_color.replace(/[\s+\/]/g, '-').toLowerCase();
+
         //div.innerHTML = first_name;        
         setTimeout(a, 500);
       }, 1000);
@@ -51,8 +68,6 @@ Tile.prototype.on_complete = function(data) {
 Tile.prototype.shuffle_tiles = function(data) {
   var d = data;
   console.log(d);
-
-
 };
 
     
@@ -79,13 +94,18 @@ Tile.prototype.stop = function() {
     clearInterval(this.interval);
 };
 
-(function generate(i) {     // self executing          
+var Dancefloor = new Dancefloor(function(response){
+    Dancefloor.data = response;
+    generate(650);
+});
+
+function generate(i) {     // self executing          
   setTimeout(function () {   
     var tile = new Tile();
     tile.init(); 
     if (--i) generate(i);   //  decrement i, 0 is falsy, will terminate at 0
-  }, 200);                  // time between tile generation
-})(10);                     // number of tiles
+  }, 10);                  // time between tile generation
+}
 
 // Verbose method of above
 // function generate(i) { 

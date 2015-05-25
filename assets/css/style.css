@@ -74,14 +74,14 @@ html, body {
     width: 100%;
 }
 #container {
-    width: 400px;
+    width: 100%;
     margin: 0 auto;
 }
 .tile {
-    width: 100px;
-    height: 100px;
+    width: 40px;
+    height: 40px;
     float: left;
-    line-height: 100px;
+    line-height: 40px;
     text-align: center;
     color: hsla(100, 100%, 100%, 1);
     font-family:'Raleway', sans-serif;
@@ -100,29 +100,28 @@ html, body {
 .conservative {
     background: hsla(203, 100%, 43%, 0.8);
 }
-.labour {
+.labour, .labour-co-operative {
     background: hsla(2, 75%, 49%, 0.8);
 }
-.liberaldemocrat {
+.liberal-democrat {
     background: hsla(41, 98%, 59%, 0.8);
 }
 .dup {
     background: hsla(13, 61%, 56%, 0.8);
 }
-.scottishnationalparty {
+.scottish-national-party {
     background: hsla(60, 100%, 50%, 0.8);
-    color: #000000;
 }
-.sinnfein {
+.sinn-fein {
     background: hsla(120, 100%, 27%, 0.8);
 }
 .independent {
     background: hsla(111, 28%, 70%, 0.8);
 }
-.plaidcymru {
+.plaid-cymru {
     background: hsla(151, 100%, 25%, 0.8);
 }
-.socialdemocraticandlabourparty {
+.social-democratic-and-labour-party {
     background: hsla(100, 100%, 70%, 0.8);
 }
 .alliance {
@@ -131,8 +130,11 @@ html, body {
 .green {
     background: hsla(90, 67%, 41%, 0.8);
 }
-.respect {
-    background: hsla(12, 100%, 50%, 0.8);
+.ukip {
+    background: hsla(294, 72%, 28%, 1.0)
+}
+.uup {
+    background: #9999FF;
 }
 .speaker {
     background: hsla(2, 1%, 70%, 0.8);
